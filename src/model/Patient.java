@@ -42,9 +42,16 @@ public class Patient {
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.dateOfBirth = dateOfBirth;
+		this.exams = new ArrayList<Exam>();
 	}
 
-	//METODI GETTER & SETTER
+	//METODS ADD & REMOVE
+	
+	public void addPatientToExam(Exam exam) {
+		this.exams.add(exam);
+	}
+		
+	//METODS GETTER & SETTER
 
 	public String getUsername() {
 		return username;
@@ -101,7 +108,7 @@ public class Patient {
 
 	public String toString() {
 		final StringBuilder sb = new StringBuilder();
-		sb.append("Paziente"); 
+		sb.append("Patient"); 
 		sb.append("{id=").append(id); 
 		sb.append(", username='").append(username);
 		sb.append(", password= '").append(password);

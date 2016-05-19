@@ -8,6 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
 @Entity
@@ -24,16 +25,33 @@ public class Doctor {
 	@OneToMany(mappedBy = "doctor")
 	private List<Exam>exams;
 
+	@ManyToMany(mappedBy = "doctor")
+	private List<Typology>typologies;
+	
 	public Doctor() {
 		this.exams = new ArrayList<Exam>();
+		this.typologies = new ArrayList<Typology>();
 	}
 
 	public Doctor(String firstName, String lastName) {
 		this.firstName = firstName;
 		this.lastName = lastName;
+		this.exams = new ArrayList<Exam>();
+		this.typologies = new ArrayList<Typology>();
 	}
 
+	//METODS ADD & REMOVE
 
+	public void addDoctorToExam(Exam exam) {
+		this.exams.add(exam);
+	}
+	
+	public void addDoctorToTypology(Typology typology) {
+		this.typologies.add(typology);
+	}
+	
+	//METODS GETTER & SETTER
+	
 	public String getFirstName() {
 		return firstName;
 	}

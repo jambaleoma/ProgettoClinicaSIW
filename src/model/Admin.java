@@ -43,7 +43,9 @@ public class Admin {
 	public boolean verificaPassword(String password) {
 		return this.password.equals(password);
 	}
-
+	
+	//METODS GETTER & SETTER
+	
 	public String getId() {
 		return id;
 	}
