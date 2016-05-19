@@ -4,25 +4,28 @@ public class Main {
 
 	public static void main(String[] args) {
 		
-		Medico medico =new Medico();
-		medico.setNome("Mario");
-		medico.setCognome("Rossi");
+		Doctor doctor =new Doctor();
+		doctor.setFirstName("Mario");
+		doctor.setLastName("Rossi");
 		
 		
-		Paziente paziente = new Paziente();
-		paziente.setNome("Luca");
-		paziente.setCognome("Bernabei");
-		paziente.setUsername("puzzone1");
-		paziente.setPwd("luca1234");
+		Patient patient = new Patient();
+		patient.setFirstName("1");
+		patient.setLastName("2");
+		patient.setUsername("3");
+		patient.setPassword("4");
 		
 		Admin admin = new Admin();
-		admin.setId("F55001");
-		admin.setPwd("cavalloGoloso");
+		admin.setUsername("username");
+		admin.setPwd("pwd");
+		admin.setFirstName("11");
+		admin.setLastName("22");
+		admin.setEMail("email@email.it");
 		
 		
-		System.out.println("Stampo ii dati del medico: " + medico.toString());
-		System.out.println("Stampo ii dati del paziente: " + paziente.toString());
-		System.out.println("Stampo ii dati del admin: " + admin.toString());
+		System.out.println("Stampo i dati del medico: " + doctor.toString());
+		System.out.println("Stampo i dati del paziente: " + patient.toString());
+		System.out.println("Stampo i dati del admin: " + admin.toString());
 		
 	}
 
