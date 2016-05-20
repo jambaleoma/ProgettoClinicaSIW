@@ -47,7 +47,7 @@ public class Patient {
 
 	//METODS ADD & REMOVE
 	
-	public void addPatientToExam(Exam exam) {
+	public void addExamToPatient(Exam exam) {
 		this.exams.add(exam);
 	}
 		
@@ -114,10 +114,22 @@ public class Patient {
 		sb.append(", password= '").append(password);
 		sb.append(", firstName='").append(firstName); 
 		sb.append(", lastName=").append(lastName); 
-		sb.append(", Date of birth='").append(dateOfBirth); 
+		sb.append(", Date of birth='").append(dateOfBirth);		
 		sb.append("}\n");
 		return sb.toString();
 	}
-
+	
+	public String toStringExams() {
+		final StringBuilder sb = new StringBuilder();
+		sb.append("Patient"); 
+		sb.append("{id=").append(id); 
+		sb.append(", firstName='").append(firstName); 
+		sb.append(", lastName=").append(lastName); 
+		sb.append(", Date of birth='").append(dateOfBirth);	
+		sb.append("}\n");
+		sb.append(", Exams='").append(exams);
+		sb.append("}\n");
+		return sb.toString();
+	}
 	
 }

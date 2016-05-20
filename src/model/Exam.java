@@ -7,7 +7,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -19,28 +18,21 @@ public class Exam {
 	private Long code;
 
 	@Column (nullable = false)
+	private String name;
 	private String result;
 
 	@Temporal (TemporalType.DATE)
 	private Date examDate;
+	
+	@Column (nullable = false)
+	private String doctor;
+	private String patient;
 
-	@ManyToOne
-	private Doctor doctor;
+	public Exam() {}
 
-	@ManyToOne
-	private Patient patient;
-
-	public Exam() {
-
-		this.code = null;
-		this.result = null;
-		this.examDate = new Date();
-		this.doctor = null;
-		this.patient = null;
-	}
-
-	public Exam(Long code, String result, Date examDate, Doctor doctor, Patient patient) {
+	public Exam(Long code, String name, String result, Date examDate, String doctor, String patient) {
 		this.code = code;
+		this.name = name;
 		this.result = result;
 		this.examDate = examDate;
 		this.doctor = doctor;
@@ -49,10 +41,18 @@ public class Exam {
 
 	//METODS GETTER & SETTER
 
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
 	public String getResult() {
 		return result;
 	}
-
+	
 	public void setResult(String result) {
 		this.result = result;
 	}
@@ -65,34 +65,35 @@ public class Exam {
 		this.examDate = examDate;
 	}
 
-	public Doctor getDoctor() {
+	public Long getCode() {
+		return code;
+	}
+
+	public String getDoctor() {
 		return doctor;
 	}
 
-	public void setDoctor(Doctor doctor) {
+	public void setDoctor(String doctor) {
 		this.doctor = doctor;
 	}
 
-	public Patient getPatient() {
+	public String getPatient() {
 		return patient;
 	}
 
-	public void setPatient(Patient patient) {
+	public void setPatient(String patient) {
 		this.patient = patient;
-	}
-
-	public Long getCode() {
-		return code;
 	}
 
 	public String toString() {
 		final StringBuilder sb = new StringBuilder();
 		sb.append("Exam"); 
-		sb.append(" {code=").append(code); 
-		sb.append(", patient='").append(patient); 
-		sb.append(", doctor=").append(doctor);
-		sb.append(", examDate='").append(examDate);
-		sb.append(", result= '").append(result);
+		sb.append(" {Code=").append(code); 
+		sb.append(", NameExam='").append(name);
+		sb.append(", Patient='").append(patient);
+		sb.append(", Doctor=").append(doctor);
+		sb.append(", ExamDate='").append(examDate);
+		sb.append(", Result= '").append(result);
 		sb.append("}\n");
 		return sb.toString();
 	}

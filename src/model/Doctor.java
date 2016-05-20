@@ -25,9 +25,9 @@ public class Doctor {
 	@OneToMany(mappedBy = "doctor")
 	private List<Exam>exams;
 
-	@ManyToMany(mappedBy = "doctor")
+	@ManyToMany
 	private List<Typology>typologies;
-	
+
 	public Doctor() {
 		this.exams = new ArrayList<Exam>();
 		this.typologies = new ArrayList<Typology>();
@@ -42,16 +42,16 @@ public class Doctor {
 
 	//METODS ADD & REMOVE
 
-	public void addDoctorToExam(Exam exam) {
+	public void addExamToDoctor(Exam exam) {
 		this.exams.add(exam);
 	}
-	
+
 	public void addDoctorToTypology(Typology typology) {
 		this.typologies.add(typology);
 	}
-	
+
 	//METODS GETTER & SETTER
-	
+
 	public String getFirstName() {
 		return firstName;
 	}
@@ -80,15 +80,37 @@ public class Doctor {
 	public Long getId() {
 		return id;
 	}
-	
-	public String toString() {
+
+	public List<Typology> getTypologies() {
+		return typologies;
+	}
+
+	public void setTypologies(List<Typology> typologies) {
+		this.typologies = typologies;
+	}
+
+	public String toStringTypologies() {
 		final StringBuilder sb = new StringBuilder();
 		sb.append("Doctor"); 
 		sb.append("{id=").append(id); 
 		sb.append(", firstName='").append(firstName); 
-		sb.append(", lastName=").append(lastName); 
+		sb.append(", lastName='").append(lastName);
+		sb.append("}\n");
+		sb.append("Typologies: \n").append(typologies);
 		sb.append("}\n");
 		return sb.toString();
 	}
-	
+
+	public String toStringExams() {
+		final StringBuilder sb = new StringBuilder();
+		sb.append("Doctor"); 
+		sb.append("{id=").append(id); 
+		sb.append(", firstName='").append(firstName); 
+		sb.append(", lastName='").append(lastName);
+		sb.append("}\n");
+		sb.append(", Exams='").append(exams);
+		sb.append("}\n");
+		return sb.toString();
+	}
+
 }
