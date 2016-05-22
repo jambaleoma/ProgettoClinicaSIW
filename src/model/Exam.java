@@ -30,8 +30,7 @@ public class Exam {
 
 	public Exam() {}
 
-	public Exam(Long code, String name, String result, Date examDate, String doctor, String patient) {
-		this.code = code;
+	public Exam(String name, String result, Date examDate, String doctor, String patient) {
 		this.name = name;
 		this.result = result;
 		this.examDate = examDate;

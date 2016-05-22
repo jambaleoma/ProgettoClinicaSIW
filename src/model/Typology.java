@@ -35,6 +35,9 @@ public class Typology {
 		this.code = code;
 		this.name = name;
 		this.details = details;
+		this.doctors = new ArrayList<Doctor>();
+		this.exams = new ArrayList<Exam>();
+		this.doctors = new ArrayList<Doctor>();
 	}
 	//METODS ADD & REMOVE
 	

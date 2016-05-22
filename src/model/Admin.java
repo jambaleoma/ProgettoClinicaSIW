@@ -50,10 +50,6 @@ public class Admin {
 		return id;
 	}
 
-	public void setId(String id) {
-		this.id = id;
-	}
-
 	public String getUsername(String username) {
 		return username;
 	}
