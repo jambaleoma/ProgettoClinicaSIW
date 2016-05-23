@@ -11,7 +11,7 @@ public class Administrator {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private String id;
+	private Long id;
 
 	@Column (unique = true)
 	private String username;
@@ -46,7 +46,7 @@ public class Administrator {
 	
 	//METODS GETTER & SETTER
 	
-	public String getId() {
+	public Long getId() {
 		return id;
 	}
 

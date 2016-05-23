@@ -48,6 +48,8 @@ public class Main {
 		patient.setUsername("FB1");
 		patient.setPassword("1234");
 
+		AdministratorFacade administratorFacade = new AdministratorFacade(emf);
+		
 		Administrator administrator = new Administrator();
 		administrator.setUsername("username");
 		administrator.setPwd("pwd");
@@ -88,6 +90,9 @@ public class Main {
 		System.out.println("Verifico se l'esame è stato aggiunto al Dottore");
 		System.out.println("Stampo gli esami del medico Rossi: " + doctor.toStringExams());
 
+		//SAVE ADMINISTRATOR
+		administratorFacade.save(administrator);
+		
 		//SAVE EXAMS
 		examFacade.save(exam);
 		
