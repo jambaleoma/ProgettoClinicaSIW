@@ -1,8 +1,9 @@
-package model;
+package it.uniroma3.model;
 
-import facade.*;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+
+import it.uniroma3.facade.*;
 
 public class Main {
 
@@ -47,19 +48,19 @@ public class Main {
 		patient.setUsername("FB1");
 		patient.setPassword("1234");
 
-		Admin admin = new Admin();
-		admin.setUsername("username");
-		admin.setPwd("pwd");
-		admin.setFirstName("11");
-		admin.setLastName("22");
-		admin.setEMail("email@email.it");
+		Administrator administrator = new Administrator();
+		administrator.setUsername("username");
+		administrator.setPwd("pwd");
+		administrator.setFirstName("11");
+		administrator.setLastName("22");
+		administrator.setEMail("email@email.it");
 
 				
 		System.out.println("Stampo i dati del medico Rossi: " + doctor.toStringTypologies());
 		System.out.println("Stampo i dati del medico Neri: " + doctor1.toStringTypologies());
 		System.out.println("Stampo i dati del medico Verdi: " + doctor2.toStringTypologies());
 		System.out.println("Stampo i dati del paziente Bianchi: " + patient.toStringExams());
-		System.out.println("Stampo i dati del admin: " + admin.toString());
+		System.out.println("Stampo i dati del admin: " + administrator.toString());
 
 		ExamFacade examFacade = new ExamFacade(emf);
 		

@@ -1,63 +1,63 @@
-package facade;
-
-import model.Doctor;
+package it.uniroma3.facade;
 
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 
-public class DoctorFacade {
+import it.uniroma3.model.Exam;
+
+public class ExamFacade {
 
 	public EntityManagerFactory emf;
 
-	public DoctorFacade(EntityManagerFactory emf) {
+	public ExamFacade(EntityManagerFactory emf) {
 		this.emf = emf;
 	}
 
-	public void save(Doctor doctor) {
+	public void save(Exam exam) {
 		EntityManager em = this.emf.createEntityManager();
 		EntityTransaction tx = em.getTransaction();
 		tx.begin();
-		em.persist(doctor);
+		em.persist(exam);
 		tx.commit();
 		em.close();
 	}
 
-	public Doctor findByPrimaryKey(Long id) {
+	public Exam findByPrimaryKey(Long code) {
 		EntityManager em = this.emf.createEntityManager();
 		EntityTransaction tx = em.getTransaction();
 		tx.begin();
-		Doctor d = em.find(Doctor.class, id);
+		Exam e = em.find(Exam.class, code);
 		tx.commit();
 		em.close();
-		return d;
+		return e;
 	}
 
-	public List<Doctor> findAllDoctors() {
+	public List<Exam> findAllExams() {
 		EntityManager em = this.emf.createEntityManager();
 		EntityTransaction tx = em.getTransaction();
 		tx.begin();
-		List<Doctor> d = em.createQuery("select d from Doctor d", Doctor.class).getResultList();
+		List<Exam> e = em.createQuery("select e from Exam e", Exam.class).getResultList();
 		tx.commit();
 		em.close();
-		return d;
+		return e;
 	}
 
-	public void update(Doctor doctor) {
+	public void update(Exam exam) {
 		EntityManager em = this.emf.createEntityManager();
 		EntityTransaction tx = em.getTransaction();
 		tx.begin();
-		em.merge(doctor);
+		em.merge(exam);
 		tx.commit();
 		em.close();
 	}
 
-	public void delete(Doctor doctor) {
+	public void delete(Exam exam) {
 		EntityManager em = this.emf.createEntityManager();
 		EntityTransaction tx = em.getTransaction();
 		tx.begin();
-		em.remove(doctor);
+		em.remove(exam);
 		tx.commit();
 		em.close();
 	}

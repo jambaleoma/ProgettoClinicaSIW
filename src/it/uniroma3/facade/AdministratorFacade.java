@@ -1,63 +1,63 @@
-package facade;
-
-import model.Admin;
+package it.uniroma3.facade;
 
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 
-public class AdminFacade {
+import it.uniroma3.model.Administrator;
+
+public class AdministratorFacade {
 
 	public EntityManagerFactory emf;
 
-	public AdminFacade(EntityManagerFactory emf) {
+	public AdministratorFacade(EntityManagerFactory emf) {
 		this.emf = emf;
 	}
 
-	public void save(Admin admin) {
+	public void save(Administrator administrator) {
 		EntityManager em = this.emf.createEntityManager();
 		EntityTransaction tx = em.getTransaction();
 		tx.begin();
-		em.persist(admin);
+		em.persist(administrator);
 		tx.commit();
 		em.close();
 	}
 
-	public Admin findByPrimaryKey(Long id) {
+	public Administrator findByPrimaryKey(Long id) {
 		EntityManager em = this.emf.createEntityManager();
 		EntityTransaction tx = em.getTransaction();
 		tx.begin();
-		Admin a = em.find(Admin.class, id);
-		tx.commit();
-		em.close();
-		return a;
-	}
-
-	public List<Admin> findAllAdmins() {
-		EntityManager em = this.emf.createEntityManager();
-		EntityTransaction tx = em.getTransaction();
-		tx.begin();
-		List<Admin> a = em.createQuery("select a from Admin a", Admin.class).getResultList();
+		Administrator a = em.find(Administrator.class, id);
 		tx.commit();
 		em.close();
 		return a;
 	}
 
-	public void update(Admin admin) {
+	public List<Administrator> findAllAdmins() {
 		EntityManager em = this.emf.createEntityManager();
 		EntityTransaction tx = em.getTransaction();
 		tx.begin();
-		em.merge(admin);
+		List<Administrator> a = em.createQuery("select a from Administrator a", Administrator.class).getResultList();
+		tx.commit();
+		em.close();
+		return a;
+	}
+
+	public void update(Administrator administrator) {
+		EntityManager em = this.emf.createEntityManager();
+		EntityTransaction tx = em.getTransaction();
+		tx.begin();
+		em.merge(administrator);
 		tx.commit();
 		em.close();
 	}
 
-	public void delete(Admin admin) {
+	public void delete(Administrator administrator) {
 		EntityManager em = this.emf.createEntityManager();
 		EntityTransaction tx = em.getTransaction();
 		tx.begin();
-		em.remove(admin);
+		em.remove(administrator);
 		tx.commit();
 		em.close();
 	}

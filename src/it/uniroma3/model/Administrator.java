@@ -1,4 +1,4 @@
-package model;
+package it.uniroma3.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -7,7 +7,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-public class Admin {
+public class Administrator {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -28,11 +28,11 @@ public class Admin {
 	@Column
 	private String eMail;
 
-	public Admin() {
+	public Administrator() {
 
 	}
 
-	public Admin(String password, String firstName, String lastName, String eMail) {
+	public Administrator(String password, String firstName, String lastName, String eMail) {
 		this.password = password;
 		this.firstName = firstName;
 		this.lastName = lastName;
@@ -92,7 +92,7 @@ public class Admin {
 
 	public String toString() {
 		final StringBuilder sb = new StringBuilder();
-		sb.append("Admin"); 
+		sb.append("Administrator"); 
 		sb.append("{id=").append(id); 
 		sb.append(", username='").append(username);
 		sb.append(", password='").append(password); 

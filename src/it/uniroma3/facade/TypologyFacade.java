@@ -1,63 +1,63 @@
-package facade;
-
-import model.Exam;
+package it.uniroma3.facade;
 
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 
-public class ExamFacade {
+import it.uniroma3.model.Typology;
+
+public class TypologyFacade {
 
 	public EntityManagerFactory emf;
 
-	public ExamFacade(EntityManagerFactory emf) {
+	public TypologyFacade(EntityManagerFactory emf) {
 		this.emf = emf;
 	}
 
-	public void save(Exam exam) {
+	public void save(Typology typology) {
 		EntityManager em = this.emf.createEntityManager();
 		EntityTransaction tx = em.getTransaction();
 		tx.begin();
-		em.persist(exam);
+		em.persist(typology);
 		tx.commit();
 		em.close();
 	}
 
-	public Exam findByPrimaryKey(Long code) {
+	public Typology findByPrimaryKey(Long code) {
 		EntityManager em = this.emf.createEntityManager();
 		EntityTransaction tx = em.getTransaction();
 		tx.begin();
-		Exam e = em.find(Exam.class, code);
+		Typology t = em.find(Typology.class, code);
 		tx.commit();
 		em.close();
-		return e;
+		return t;
 	}
 
-	public List<Exam> findAllExams() {
+	public List<Typology> findAllTypologies() {
 		EntityManager em = this.emf.createEntityManager();
 		EntityTransaction tx = em.getTransaction();
 		tx.begin();
-		List<Exam> e = em.createQuery("select e from Exam e", Exam.class).getResultList();
+		List<Typology> t = em.createQuery("select t from Typologies p", Typology.class).getResultList();
 		tx.commit();
 		em.close();
-		return e;
+		return t;
 	}
 
-	public void update(Exam exam) {
+	public void update(Typology typology) {
 		EntityManager em = this.emf.createEntityManager();
 		EntityTransaction tx = em.getTransaction();
 		tx.begin();
-		em.merge(exam);
+		em.merge(typology);
 		tx.commit();
 		em.close();
 	}
 
-	public void delete(Exam exam) {
+	public void delete(Typology typology) {
 		EntityManager em = this.emf.createEntityManager();
 		EntityTransaction tx = em.getTransaction();
 		tx.begin();
-		em.remove(exam);
+		em.remove(typology);
 		tx.commit();
 		em.close();
 	}

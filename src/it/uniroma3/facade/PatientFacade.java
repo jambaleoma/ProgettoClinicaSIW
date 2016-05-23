@@ -1,11 +1,11 @@
-package facade;
-
-import model.Patient;
+package it.uniroma3.facade;
 
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
+
+import it.uniroma3.model.Patient;
 
 public class PatientFacade {
 

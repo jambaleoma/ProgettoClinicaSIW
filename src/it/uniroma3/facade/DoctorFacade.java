@@ -1,63 +1,63 @@
-package facade;
-
-import model.Typology;
+package it.uniroma3.facade;
 
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 
-public class TypologyFacade {
+import it.uniroma3.model.Doctor;
+
+public class DoctorFacade {
 
 	public EntityManagerFactory emf;
 
-	public TypologyFacade(EntityManagerFactory emf) {
+	public DoctorFacade(EntityManagerFactory emf) {
 		this.emf = emf;
 	}
 
-	public void save(Typology typology) {
+	public void save(Doctor doctor) {
 		EntityManager em = this.emf.createEntityManager();
 		EntityTransaction tx = em.getTransaction();
 		tx.begin();
-		em.persist(typology);
+		em.persist(doctor);
 		tx.commit();
 		em.close();
 	}
 
-	public Typology findByPrimaryKey(Long code) {
+	public Doctor findByPrimaryKey(Long id) {
 		EntityManager em = this.emf.createEntityManager();
 		EntityTransaction tx = em.getTransaction();
 		tx.begin();
-		Typology t = em.find(Typology.class, code);
+		Doctor d = em.find(Doctor.class, id);
 		tx.commit();
 		em.close();
-		return t;
+		return d;
 	}
 
-	public List<Typology> findAllTypologies() {
+	public List<Doctor> findAllDoctors() {
 		EntityManager em = this.emf.createEntityManager();
 		EntityTransaction tx = em.getTransaction();
 		tx.begin();
-		List<Typology> t = em.createQuery("select t from Typologies p", Typology.class).getResultList();
+		List<Doctor> d = em.createQuery("select d from Doctor d", Doctor.class).getResultList();
 		tx.commit();
 		em.close();
-		return t;
+		return d;
 	}
 
-	public void update(Typology typology) {
+	public void update(Doctor doctor) {
 		EntityManager em = this.emf.createEntityManager();
 		EntityTransaction tx = em.getTransaction();
 		tx.begin();
-		em.merge(typology);
+		em.merge(doctor);
 		tx.commit();
 		em.close();
 	}
 
-	public void delete(Typology typology) {
+	public void delete(Doctor doctor) {
 		EntityManager em = this.emf.createEntityManager();
 		EntityTransaction tx = em.getTransaction();
 		tx.begin();
-		em.remove(typology);
+		em.remove(doctor);
 		tx.commit();
 		em.close();
 	}
