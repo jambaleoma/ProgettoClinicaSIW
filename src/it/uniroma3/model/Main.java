@@ -1,16 +1,19 @@
 package it.uniroma3.model;
 
+import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
-import it.uniroma3.facade.*;
+import it.uniroma3.persistence.*;
 
 public class Main {
 
 	public static void main(String[] args) {
-		EntityManagerFactory emf = Persistence.createEntityManagerFactory("clinic-unit");
 
-		TypologyFacade typologyFacade = new TypologyFacade(emf);
+		EntityManagerFactory emf = Persistence.createEntityManagerFactory("clinic-unit");
+		EntityManager em = emf.createEntityManager();
+		
+		TypologyDao typologyDao = new TypologyDao(em);
 
 		Typology typology = new Typology();
 		typology.setCode(1001L);
@@ -22,7 +25,7 @@ public class Main {
 		typology1.setName("Urin Exam");
 		typology1.setDetails("bla bla bla");
 		
-		DoctorFacade doctorFacade = new DoctorFacade(emf);
+		DoctorDao doctorDao = new DoctorDao(em);
 
 		Doctor doctor =new Doctor();
 		doctor.setFirstName("Mario");
@@ -40,7 +43,7 @@ public class Main {
 		doctor2.addDoctorToTypology(typology1);
 		doctor2.addDoctorToTypology(typology);
 		
-		PatientFacade patientFacade = new PatientFacade(emf);
+		PatientDao patientDao = new PatientDao(em);
 
 		Patient patient = new Patient();
 		patient.setFirstName("Franco");
@@ -48,7 +51,7 @@ public class Main {
 		patient.setUsername("FB1");
 		patient.setPassword("1234");
 
-		AdministratorFacade administratorFacade = new AdministratorFacade(emf);
+		AdministratorDao administratorDao = new AdministratorDao(em);
 		
 		Administrator administrator = new Administrator();
 		administrator.setUsername("username");
@@ -64,7 +67,7 @@ public class Main {
 		System.out.println("Stampo i dati del paziente Bianchi: " + patient.toStringExams());
 		System.out.println("Stampo i dati del admin: " + administrator.toString());
 
-		ExamFacade examFacade = new ExamFacade(emf);
+		ExamDao examDao = new ExamDao(em);
 		
 		System.out.println("Creo un esame da una Tipologia");
 		Exam exam = new Exam();
@@ -91,24 +94,24 @@ public class Main {
 		System.out.println("Stampo gli esami del medico Rossi: " + doctor.toStringExams());
 
 		//SAVE ADMINISTRATOR
-		administratorFacade.save(administrator);
+		administratorDao.save(administrator);
 		
 		//SAVE EXAMS
-		examFacade.save(exam);
+		examDao.save(exam);
 		
 		//SAVE TYPOLOGIES
-		typologyFacade.save(typology);
-		typologyFacade.save(typology1);
+		typologyDao.save(typology);
+		typologyDao.save(typology1);
 		
 		//SAVE DOCTORS
-		doctorFacade.save(doctor);
-		doctorFacade.save(doctor1);
-		doctorFacade.save(doctor2);
+		doctorDao.save(doctor);
+		doctorDao.save(doctor1);
+		doctorDao.save(doctor2);
 		
 		//SAVE PATIENTS
-		patientFacade.save(patient);
+		patientDao.save(patient);
 		
-		emf.close();
+		em.close();
 
 	}
 
