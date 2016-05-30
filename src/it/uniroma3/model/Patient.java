@@ -1,6 +1,7 @@
 package it.uniroma3.model;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -29,7 +30,7 @@ public class Patient {
 	private String lastName;
 
 	@Temporal(TemporalType.DATE)
-	private int dateOfBirth;
+	private Date dateOfBirth;
 
 	@OneToMany(mappedBy = "patient", fetch=FetchType.EAGER)
 	private List<Exam>exams;
@@ -37,7 +38,7 @@ public class Patient {
 	public Patient() {
 	}
 
-	public Patient(String username, String password, String firstName, String lastName, int dateOfBirth) {
+	public Patient(String username, String password, String firstName, String lastName, Date dateOfBirth) {
 		this.username = username;
 		this.password = password;
 		this.firstName = firstName;
@@ -100,11 +101,11 @@ public class Patient {
 		this.lastName = lastName;
 	}
 
-	public int getDateOfBirth() {
+	public Date getDateOfBirth() {
 		return dateOfBirth;
 	}
 
-	public void setDateOfBirth(int dateOfBirth) {
+	public void setDateOfBirth(Date dateOfBirth) {
 		this.dateOfBirth = dateOfBirth;
 	}
 

@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
@@ -22,7 +23,7 @@ public class Typology {
 	@OneToMany
 	private List<Exam>exams;
 
-	@ManyToMany(mappedBy = "typologies")
+	@ManyToMany(mappedBy = "typologies", fetch=FetchType.EAGER)
 	private List<Doctor>doctors;
 
 	public Typology() {

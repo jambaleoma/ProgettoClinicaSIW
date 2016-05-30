@@ -37,7 +37,7 @@ public class Main {
 		//creo i pazienti
 		
 		PatientDao pd = new PatientDao();
-		pd.create("FB1", "1234", "Franco", "Bianchi", 14/01/1993);
+		pd.create("FB1", "1234", "Franco", "Bianchi", null);
 		
 		//creo gli Amministratori
 		

@@ -2,21 +2,26 @@
 <persistence version="2.0"
 	xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd">
-	<persistence-unit name="clinic-unit" transaction-type="RESOURCE_LOCAL">
-<class>it.uniroma3.model.Administrator</class>
-<class>it.uniroma3.model.Doctor</class>
-<class>it.uniroma3.model.Exam</class>
-<class>it.uniroma3.model.Patient</class>		
-<class>it.uniroma3.model.Typology</class>
-<properties>
+	<persistence-unit name="clinic-unit"
+		transaction-type="RESOURCE_LOCAL">
+		<class>it.uniroma3.model.Doctor</class>
+		<class>it.uniroma3.model.Patient</class>
+		<class>it.uniroma3.model.Administrator</class>
+		<class>it.uniroma3.model.Typology</class>
+		<class>it.uniroma3.model.Exam</class>		
+		<properties>
 			<property name="openjpa.ConnectionDriverName" value="org.postgresql.Driver" />
 			<property name="openjpa.ConnectionUserName" value="postgres" />
 			<property name="openjpa.ConnectionPassword" value="postgres" />
-		<property name="openjpa.ConnectionURL" value="jdbc:postgresql://localhost/clinic" />
+			<property name="openjpa.ConnectionURL" value="jdbc:postgresql://localhost/clinic" />
 			<property name="openjpa.jdbc.DBDictionary" value="postgres" />
-  			<property name="openjpa.jdbc.SynchronizeMappings" value="buildSchema(SchemaAction=add,ForeignKeys=true)" /> 
-			<property name="openjpa.Log" value="DefaultLevel=WARN, Runtime=INFO, Tool=INFO, SQL=TRACE"/>
-  			<property name="openjpa.jdbc.MappingDefaults" value="ForeignKeyDeleteAction=restrict,JoinForeignKeyDeleteAction=restrict"/>
+			<property name="openjpa.jdbc.SynchronizeMappings"
+				value="buildSchema(SchemaAction=add,ForeignKeys=true)" />
+			<property name="openjpa.Log"
+				value="DefaultLevel=WARN, Runtime=INFO, Tool=INFO, SQL=TRACE" />
+			<property name="openjpa.jdbc.MappingDefaults"
+				value="ForeignKeyDeleteAction=restrict,JoinForeignKeyDeleteAction=restrict" />
+			<property name="openjpa.RuntimeUnenhancedClasses" value="supported"/>
 		</properties>
 	</persistence-unit>
 </persistence>

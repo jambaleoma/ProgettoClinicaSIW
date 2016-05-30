@@ -1,5 +1,6 @@
 package it.uniroma3.persistence;
 
+import java.util.Date;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.*;
@@ -12,7 +13,7 @@ public class PatientDao {
 	@PersistenceContext(unitName = "clinic-unit")
 	public EntityManager em;
 
-	public Patient create(String username, String password, String firstName, String lastName, int dateOfBirth) {
+	public Patient create(String username, String password, String firstName, String lastName, Date dateOfBirth) {
 		Patient patient = new Patient(username, password, firstName, lastName, dateOfBirth);
 		this.em.persist(patient);
 		return patient;
@@ -39,12 +40,9 @@ public class PatientDao {
 		this.em.merge(patient);
 		}
 
-	public void delete(Patient patient) {
-		EntityTransaction tx = this.em.getTransaction();
-		tx.begin();
-		this.em.remove(patient);
-		tx.commit();
-		this.em.close();
-	}
+	public void delete(Long	id) {
+		Patient p = this.findByPrimaryKey(id);
+		this.em.remove(p);
+		}
 
 }
