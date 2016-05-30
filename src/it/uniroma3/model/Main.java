@@ -12,39 +12,42 @@ public class Main {
 
 		EntityManagerFactory emf = Persistence.createEntityManagerFactory("clinic-unit");
 		EntityManager em = emf.createEntityManager();
-		
-		//creo le tipologie
-		
-		TypologyDao td = new TypologyDao();
-		
-		td.create(1001L, "Blod Exam", "bla bla bla");
-		td.create(1002L, "Urin Exam", "bla bla bla");
-		
+
+
+
 		//creo i dottori
-		
+
 		DoctorDao dd = new DoctorDao();
 		dd.create("Mario", "Rossi");
 		dd.create("Luca", "Neri");
 		dd.create("Ugo", "Verdi");
-		
+
+		//creo le tipologie
+
+		TypologyDao td = new TypologyDao();
+
+		td.create(1001L, "Blod Exam", "bla bla bla");
+		td.create(1002L, "Urin Exam", "bla bla bla");
+
+
 		//Aggiungo ai dottori le rispettive tipologie di competenza
-		
+
 		dd.getDoctorByLastname("Rossi").addDoctorToTypology(td.findByPrimaryKey(1001L));
 		dd.getDoctorByLastname("Neri").addDoctorToTypology(td.findByPrimaryKey(1002L));
 		dd.getDoctorByLastname("Verdi").addDoctorToTypology(td.findByPrimaryKey(1001L));
 		dd.getDoctorByLastname("Verdi").addDoctorToTypology(td.findByPrimaryKey(1002L));
-		
+
 		//creo i pazienti
-		
+
 		PatientDao pd = new PatientDao();
 		pd.create("FB1", "1234", "Franco", "Bianchi", null);
-		
+
 		//creo gli Amministratori
-		
+
 		AdministratorDao ad = new AdministratorDao();
 		ad.create("username", "pwd", "11", "22", "email@email.it");
-				
-				
+
+
 		System.out.println("Stampo i dati del medico Rossi: " + dd.getDoctorByLastname("Rossi").toStringTypologies());
 		System.out.println("Stampo i dati del medico Neri: " + dd.getDoctorByLastname("Neri").toStringTypologies());
 		System.out.println("Stampo i dati del medico Verdi: " + dd.getDoctorByLastname("Verdi").toStringTypologies());
