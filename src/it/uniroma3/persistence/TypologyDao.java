@@ -1,56 +1,39 @@
 package it.uniroma3.persistence;
 
 import java.util.List;
-import javax.persistence.EntityManager;
-import javax.persistence.EntityTransaction;
 
-import it.uniroma3.model.Typology;
+import javax.ejb.Stateless;
+import javax.persistence.*;
+import it.uniroma3.model.*;
 
-public class TypologyDao implements DAO<Typology>{
+@Stateless(name="tDao")
+public class TypologyDao {
 
+	@PersistenceContext(unitName = "clinic-unit")
 	public EntityManager em;
 
-	public TypologyDao(EntityManager em) {
-		this.em = em;
-	}
-
-	public void save(Typology typology) {
-		EntityTransaction tx = this.em.getTransaction();
-		tx.begin();
+	public Typology create(Long code, String name, String details) {
+		Typology typology = new Typology(code, name, details);
 		this.em.persist(typology);
-		tx.commit();
-		this.em.close();
+		return typology;
 	}
 
-	public Typology findByPrimaryKey(long code) {
-		EntityTransaction tx = this.em.getTransaction();
-		tx.begin();
+	public Typology findByPrimaryKey(Long code) {
 		Typology t = this.em.find(Typology.class, code);
-		tx.commit();
-		this.em.close();
 		return t;
 	}
 
 	public List<Typology> findAll() {
-		List<Typology> t = em.createQuery("Typology.findAll").getResultList();
-		this.em.close();
-		return t;
+		TypedQuery<Typology> q = this.em.createQuery("SELECT t FROM Typology t", Typology.class);
+		return q.getResultList();
 	}
 
 	public void update(Typology typology) {
-		EntityTransaction tx = this.em.getTransaction();
-		tx.begin();
 		this.em.merge(typology);
-		tx.commit();
-		this.em.close();
 	}
 
-	public void delete(Typology typology) {
-		EntityTransaction tx = this.em.getTransaction();
-		tx.begin();
-		this.em.remove(typology);
-		tx.commit();
-		this.em.close();
+	public void delete(Long code) {
+		Typology t = this.findByPrimaryKey(code);
+		this.em.remove(t);
 	}
-
 }

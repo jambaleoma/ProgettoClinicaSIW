@@ -1,56 +1,42 @@
 package it.uniroma3.persistence;
 
 import java.util.List;
-import javax.persistence.EntityManager;
-import javax.persistence.EntityTransaction;
 
-import it.uniroma3.model.Doctor;
+import javax.ejb.Stateless;
+import javax.persistence.*;
 
-public class DoctorDao implements DAO<Doctor>{
+import it.uniroma3.model.*;
 
+@Stateless (name="dDao")
+public class DoctorDao {
+
+	@PersistenceContext(unitName = "clinic-unit")
 	public EntityManager em;
 
-	public DoctorDao(EntityManager em) {
-		this.em = em;
-	}
-
-	public void save(Doctor doctor) {
-		EntityTransaction tx = this.em.getTransaction();
-		tx.begin();
+	public Doctor create(String firstName, String lastName) {
+		Doctor doctor = new Doctor(firstName, lastName);
 		this.em.persist(doctor);
-		tx.commit();
-		this.em.close();
+		return doctor;
 	}
 
-	public Doctor findByPrimaryKey(long id) {
-		EntityTransaction tx = this.em.getTransaction();
-		tx.begin();
+	public Doctor getDoctorByLastname(String lastName) {
+		Query q = em.createQuery("SELECT d FROM Doctor d WHERE d.lastname = :lastname");
+		q.setParameter("lastname", lastName);
+		Doctor d = (Doctor) q.getSingleResult();
+		return d;
+	}
+	
+	public Doctor findByPrimaryKey(Long id) {
 		Doctor d = this.em.find(Doctor.class, id);
-		tx.commit();
-		this.em.close();
 		return d;
 	}
 
 	public List<Doctor> findAll() {
-		List<Doctor> d = em.createQuery("Doctor.findAll").getResultList();
-		this.em.close();
-		return d;
+		TypedQuery<Doctor> q = this.em.createQuery("SELECT d FROM Doctor d", Doctor.class);
+		return q.getResultList();
 	}
 
 	public void update(Doctor doctor) {
-		EntityTransaction tx = this.em.getTransaction();
-		tx.begin();
 		this.em.merge(doctor);
-		tx.commit();
-		this.em.close();
-	}
-
-	public void delete(Doctor doctor) {
-		EntityTransaction tx = this.em.getTransaction();
-		tx.begin();
-		this.em.remove(doctor);
-		tx.commit();
-		this.em.close();
-	}
-
+		}
 }

@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -17,25 +18,34 @@ public class Exam {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long code;
 
-	@Column (nullable = false)
+	@Column (unique = true)
 	private String name;
+	
+	@Column
 	private String result;
 
 	@Temporal (TemporalType.DATE)
 	private Date examDate;
-	
-	@Column (nullable = false)
-	private String doctor;
-	private String patient;
 
+	@ManyToOne
+	private Typology typology;
+	
+	@ManyToOne
+    private Patient patient;
+	
+	@ManyToOne
+    private Doctor doctor;
+		
 	public Exam() {}
 
-	public Exam(String name, String result, Date examDate, String doctor, String patient) {
+	public Exam(String name, String result, Date examDate, Typology typology, Patient patient, Doctor doctor) {
 		this.name = name;
 		this.result = result;
 		this.examDate = examDate;
+		this.typology = typology;
 		this.doctor = doctor;
 		this.patient = patient;
+		
 	}
 
 	//METODS GETTER & SETTER
@@ -68,20 +78,29 @@ public class Exam {
 		return code;
 	}
 
-	public String getDoctor() {
-		return doctor;
-	}
 
-	public void setDoctor(String doctor) {
-		this.doctor = doctor;
-	}
-
-	public String getPatient() {
+	public Patient getPatient() {
 		return patient;
 	}
 
-	public void setPatient(String patient) {
+	public void setPatient(Patient patient) {
 		this.patient = patient;
+	}
+
+	public Doctor getDoctor() {
+		return doctor;
+	}
+
+	public void setDoctor(Doctor doctor) {
+		this.doctor = doctor;
+	}
+	
+	public Typology getTypology() {
+		return typology;
+	}
+
+	public void setTypology(Typology typology) {
+		this.typology = typology;
 	}
 
 	public String toString() {
@@ -89,9 +108,9 @@ public class Exam {
 		sb.append("Exam"); 
 		sb.append(" {Code=").append(code); 
 		sb.append(", NameExam='").append(name);
-		sb.append(", Patient='").append(patient);
-		sb.append(", Doctor=").append(doctor);
 		sb.append(", ExamDate='").append(examDate);
+		sb.append(", Doctor='").append(doctor);
+		sb.append(", Patient='").append(patient);
 		sb.append(", Result= '").append(result);
 		sb.append("}\n");
 		return sb.toString();

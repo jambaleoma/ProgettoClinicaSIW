@@ -1,49 +1,43 @@
 package it.uniroma3.persistence;
 
 import java.util.List;
-import javax.persistence.EntityManager;
-import javax.persistence.EntityTransaction;
+import javax.ejb.Stateless;
+import javax.persistence.*;
 
 import it.uniroma3.model.Patient;
 
-public class PatientDao implements DAO<Patient>{
-
+@Stateless (name="pDao")
+public class PatientDao {
+	
+	@PersistenceContext(unitName = "clinic-unit")
 	public EntityManager em;
 
-	public PatientDao(EntityManager em) {
-		this.em = em;
-	}
-
-	public void save(Patient patient) {
-		EntityTransaction tx = this.em.getTransaction();
-		tx.begin();
+	public Patient create(String username, String password, String firstName, String lastName, int dateOfBirth) {
+		Patient patient = new Patient(username, password, firstName, lastName, dateOfBirth);
 		this.em.persist(patient);
-		tx.commit();
-		this.em.close();
+		return patient;
 	}
 
-	public Patient findByPrimaryKey(long id) {
-		EntityTransaction tx = this.em.getTransaction();
-		tx.begin();
+	public Patient getPatientByUsername(String username) {
+		Query q = em.createQuery("SELECT p FROM Patient p WHERE p.username = :username");
+		q.setParameter("username", username);
+		Patient p = (Patient) q.getSingleResult();
+		return p;
+	}
+	
+	public Patient findByPrimaryKey(Long id) {
 		Patient p = this.em.find(Patient.class, id);
-		tx.commit();
-		this.em.close();
 		return p;
 	}
 
 	public List<Patient> findAll() {
-		List<Patient> p = em.createQuery("Patient.findAll").getResultList();
-		this.em.close();
-		return p;
+		TypedQuery<Patient> p = this.em.createQuery("SELECT p FROM Patient p", Patient.class);
+		return p.getResultList();
 	}
 
 	public void update(Patient patient) {
-		EntityTransaction tx = this.em.getTransaction();
-		tx.begin();
 		this.em.merge(patient);
-		tx.commit();
-		this.em.close();
-	}
+		}
 
 	public void delete(Patient patient) {
 		EntityTransaction tx = this.em.getTransaction();

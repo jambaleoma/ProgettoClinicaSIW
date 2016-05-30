@@ -30,15 +30,14 @@ public class Typology {
 		this.exams = new ArrayList<Exam>();
 	}
 
-	public Typology(Long code, String name, String details) {
+	public Typology (Long code, String name, String details) {
 
 		this.code = code;
 		this.name = name;
 		this.details = details;
-		this.doctors = new ArrayList<Doctor>();
-		this.exams = new ArrayList<Exam>();
-		this.doctors = new ArrayList<Doctor>();
 	}
+	
+	
 	//METODS ADD & REMOVE
 	
 	public void addExamToTypology(Exam exam) {
@@ -75,22 +74,6 @@ public class Typology {
 		this.details = details;
 	}
 
-	public List<Exam> getExams() {
-		return exams;
-	}
-
-	public void setExams(List<Exam> exams) {
-		this.exams = exams;
-	}
-
-	public List<Doctor> getDoctors() {
-		return doctors;
-	}
-
-	public void setDoctors(List<Doctor> doctors) {
-		this.doctors = doctors;
-	}
-
 	public String toString() {
 		final StringBuilder sb = new StringBuilder();
 		sb.append("Typology"); 
@@ -99,29 +82,5 @@ public class Typology {
 		sb.append(", Details='").append(details);
 		sb.append("}\n");
 		return sb.toString();
-	}
-	
-	public String toStringExams() {
-		final StringBuilder sb = new StringBuilder();
-		sb.append("Typology"); 
-		sb.append("{code=").append(code); 
-		sb.append(", Name='").append(name); 
-		sb.append(", Details='").append(details);
-		sb.append("}\n");
-		sb.append(", Exams='").append(exams);
-		sb.append("}\n");
-		return sb.toString();
-	}
-	
-	public String toStringDoctors() {
-		final StringBuilder sb = new StringBuilder();
-		sb.append("Typology"); 
-		sb.append("{code=").append(code); 
-		sb.append(", Name='").append(name); 
-		sb.append(", Details='").append(details);
-		sb.append("}\n");
-		sb.append(", Doctors='").append(doctors);
-		sb.append("}\n");
-		return sb.toString();
-	}
+	}	
 }

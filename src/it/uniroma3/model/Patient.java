@@ -1,11 +1,11 @@
 package it.uniroma3.model;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -20,23 +20,24 @@ public class Patient {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 
-	@Column (nullable = false)
+	@Column (unique = true)
 	private String username;
+	
+	@Column (nullable = false)
 	private String password;
 	private String firstName;
 	private String lastName;
 
 	@Temporal(TemporalType.DATE)
-	private Date dateOfBirth;
+	private int dateOfBirth;
 
-	@OneToMany(mappedBy = "patient")
+	@OneToMany(mappedBy = "patient", fetch=FetchType.EAGER)
 	private List<Exam>exams;
 
 	public Patient() {
-		this.exams = new ArrayList<Exam>();		
 	}
 
-	public Patient(String username, String password, String firstName, String lastName, Date dateOfBirth) {
+	public Patient(String username, String password, String firstName, String lastName, int dateOfBirth) {
 		this.username = username;
 		this.password = password;
 		this.firstName = firstName;
@@ -45,6 +46,12 @@ public class Patient {
 		this.exams = new ArrayList<Exam>();
 	}
 
+	//METODS CHECK
+	
+	public boolean checkPassword (String password) {
+		return this.password.equals(password);
+	}
+		
 	//METODS ADD & REMOVE
 	
 	public void addExamToPatient(Exam exam) {
@@ -93,11 +100,11 @@ public class Patient {
 		this.lastName = lastName;
 	}
 
-	public Date getDateOfBirth() {
+	public int getDateOfBirth() {
 		return dateOfBirth;
 	}
 
-	public void setDateOfBirth(Date dateOfBirth) {
+	public void setDateOfBirth(int dateOfBirth) {
 		this.dateOfBirth = dateOfBirth;
 	}
 

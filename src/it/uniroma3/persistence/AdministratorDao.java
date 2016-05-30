@@ -1,57 +1,41 @@
 package it.uniroma3.persistence;
 
 import java.util.List;
-import javax.persistence.EntityManager;
-import javax.persistence.EntityTransaction;
+
+import javax.ejb.Stateless;
+import javax.persistence.*;
 
 import it.uniroma3.model.Administrator;
 
-public class AdministratorDao implements DAO<Administrator>{
+@Stateless(name="aDao")
+public class AdministratorDao {
 
+	@PersistenceContext(unitName = "clinic-unit")
 	private EntityManager em;
 
-	public AdministratorDao(EntityManager em) {
-		this.em = em;
+	public Administrator create(String username, String password, String firstName, String lastName, String eMail) {
+		Administrator administrator = new Administrator(username, password, firstName, lastName, eMail);
+		this.em.persist(administrator);
+		return administrator;
 	}
 	
-	@Override
-	public void save(Administrator administrator) {
-		EntityTransaction tx = this.em.getTransaction();
-		tx.begin();
-		this.em.persist(administrator);
-		tx.commit();
-		this.em.close();
+	public Administrator getAdministratorByUsername(String username) {
+		Query q = em.createQuery("SELECT a FROM Administrator a WHERE a.username = :username");
+		q.setParameter("username", username);
+		return (Administrator) q.getSingleResult();
 	}
-
-	public Administrator findByPrimaryKey(long id) {
-		EntityTransaction tx = this.em.getTransaction();
-		tx.begin();
+	
+	public Administrator findByPrimaryKey(Long id) {
 		Administrator a = this.em.find(Administrator.class, id);
-		tx.commit();
-		this.em.close();
 		return a;
 	}
 
 	public List<Administrator> findAll() {
-		List<Administrator> a = em.createQuery("Administrator.findAll").getResultList();
-		this.em.close();
-		return a;
+		TypedQuery<Administrator> q = this.em.createQuery("SELECT a FROM Administrator a", Administrator.class);
+		return q.getResultList();
 	}
 
 	public void update(Administrator administrator) {
-		EntityTransaction tx = this.em.getTransaction();
-		tx.begin();
 		this.em.merge(administrator);
-		tx.commit();
-		this.em.close();
-	}
-
-	public void delete(Administrator administrator) {
-		EntityTransaction tx = this.em.getTransaction();
-		tx.begin();
-		this.em.remove(administrator);
-		tx.commit();
-		this.em.close();
-	}
-
+		}
 }

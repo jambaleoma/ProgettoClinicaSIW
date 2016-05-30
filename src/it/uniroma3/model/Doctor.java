@@ -20,6 +20,8 @@ public class Doctor {
 
 	@Column (nullable = false)
 	private String firstName;
+	
+	@Column (unique = true)
 	private String lastName;
 
 	@OneToMany(mappedBy = "doctor")
@@ -29,7 +31,6 @@ public class Doctor {
 	private List<Typology>typologies;
 
 	public Doctor() {
-		this.exams = new ArrayList<Exam>();
 		this.typologies = new ArrayList<Typology>();
 	}
 
@@ -37,7 +38,6 @@ public class Doctor {
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.exams = new ArrayList<Exam>();
-		this.typologies = new ArrayList<Typology>();
 	}
 
 	//METODS ADD & REMOVE

@@ -1,56 +1,47 @@
 package it.uniroma3.persistence;
 
+import java.util.Date;
 import java.util.List;
-import javax.persistence.EntityManager;
-import javax.persistence.EntityTransaction;
 
-import it.uniroma3.model.Exam;
+import javax.ejb.Stateless;
+import javax.persistence.*;
 
-public class ExamDao implements DAO<Exam>{
+import it.uniroma3.model.*;
 
+@Stateless(name="eDao")
+public class ExamDao {
+
+	@PersistenceContext(unitName = "clinic-unit")
 	public EntityManager em;
 
-	public ExamDao(EntityManager em) {
-		this.em = em;
+	public Exam create(String name, String result, Date examDate, Typology typology, Patient patient, Doctor doctor) {
+		Exam exam = new Exam(name, result, examDate, typology, patient, doctor);
+		patient.addExamToPatient(exam);
+		doctor.addExamToDoctor(exam);
+		em.persist(exam);
+		em.merge(patient);
+		em.merge(doctor);
+		return exam;
 	}
 
-	public void save(Exam exam) {
-		EntityTransaction tx = this.em.getTransaction();
-		tx.begin();
-		this.em.persist(exam);
-		tx.commit();
-		this.em.close();
+	public Exam getExamByName(String ename) {
+		Query q = em.createQuery("SELECT e FROM Exam e WHERE e.name = :ename");
+		q.setParameter("name", ename);
+		Exam e = (Exam) q.getSingleResult();
+		return e;
 	}
-
-	public Exam findByPrimaryKey(long code) {
-		EntityTransaction tx = this.em.getTransaction();
-		tx.begin();
-		Exam e = this.em.find(Exam.class, code);
-		tx.commit();
-		this.em.close();
+	
+	public Exam findByPrimaryKey(Long code) {
+		Exam e = this.em.find (Exam.class, code);
 		return e;
 	}
 
 	public List<Exam> findAll() {
-		List<Exam> e = em.createQuery("Exam.findAll").getResultList();
-		this.em.close();
-		return e;
+		TypedQuery<Exam> q = this.em.createQuery("SELECT e FROM Exam e", Exam.class);
+		return q.getResultList();
 	}
 
-	public void update(Exam exam) {
-		EntityTransaction tx = this.em.getTransaction();
-		tx.begin();
-		this.em.merge(exam);
-		tx.commit();
-		this.em.close();
+	public void update(Exam e) {
+		this.em.merge(e);
 	}
-
-	public void delete(Exam exam) {
-		EntityTransaction tx = this.em.getTransaction();
-		tx.begin();
-		this.em.remove(exam);
-		tx.commit();
-		this.em.close();
-	}
-
 }

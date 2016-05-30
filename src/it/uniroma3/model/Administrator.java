@@ -32,7 +32,8 @@ public class Administrator {
 
 	}
 
-	public Administrator(String password, String firstName, String lastName, String eMail) {
+	public Administrator(String username, String password, String firstName, String lastName, String eMail) {
+		this.username = username;
 		this.password = password;
 		this.firstName = firstName;
 		this.lastName = lastName;
