@@ -10,16 +10,11 @@
 		<class>it.uniroma3.model.Administrator</class>
 		<class>it.uniroma3.model.Typology</class>
 		<class>it.uniroma3.model.Exam</class>
+		
+		
 		<properties>
-			<property name="openjpa.ConnectionDriverName" value="org.postgresql.Driver" />
-			<property name="openjpa.ConnectionUserName" value="postgres" />
-			<property name="openjpa.ConnectionPassword" value="postgres" />
-			<property name="openjpa.ConnectionURL" value="jdbc:postgresql://localhost/clinic" />
-			<property name="openjpa.jdbc.DBDictionary" value="postgres" />
-			<property name="openjpa.jdbc.SynchronizeMappings" value="buildSchema(SchemaAction=add,ForeignKeys=true)" />
-			<property name="openjpa.Log" value="DefaultLevel=WARN, Runtime=INFO, Tool=INFO, SQL=TRACE" />
-			<property name="openjpa.jdbc.MappingDefaults" value="ForeignKeyDeleteAction=restrict,JoinForeignKeyDeleteAction=restrict" />
-			<property name="openjpa.RuntimeUnenhancedClasses" value="supported" />
+			<property name="openjpa.jdbc.SynchronizeMappings"  value="buildSchema(ForeignKeys=true)" />
+			<property name="openjpa.jdbc.MappingDefaults" value="ForeignKeyDeleteAction=cascade,JoinForeignKeyDeleteAction=cascade"/>
 		</properties>
 	</persistence-unit>
 </persistence>
