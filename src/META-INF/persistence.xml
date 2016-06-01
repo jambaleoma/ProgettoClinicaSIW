@@ -16,12 +16,9 @@
 			<property name="openjpa.ConnectionPassword" value="postgres" />
 			<property name="openjpa.ConnectionURL" value="jdbc:postgresql://localhost/clinic" />
 			<property name="openjpa.jdbc.DBDictionary" value="postgres" />
-			<property name="openjpa.jdbc.SynchronizeMappings"
-				value="buildSchema(SchemaAction=add,ForeignKeys=true)" />
-			<property name="openjpa.Log"
-				value="DefaultLevel=WARN, Runtime=INFO, Tool=INFO, SQL=TRACE" />
-			<property name="openjpa.jdbc.MappingDefaults"
-				value="ForeignKeyDeleteAction=restrict,JoinForeignKeyDeleteAction=restrict" />
+			<property name="openjpa.jdbc.SynchronizeMappings" value="buildSchema(SchemaAction=add,ForeignKeys=true)" />
+			<property name="openjpa.Log" value="DefaultLevel=WARN, Runtime=INFO, Tool=INFO, SQL=TRACE" />
+			<property name="openjpa.jdbc.MappingDefaults" value="ForeignKeyDeleteAction=restrict,JoinForeignKeyDeleteAction=restrict" />
 			<property name="openjpa.RuntimeUnenhancedClasses" value="supported" />
 		</properties>
 	</persistence-unit>
