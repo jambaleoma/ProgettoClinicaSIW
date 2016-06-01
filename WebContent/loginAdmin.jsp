@@ -5,7 +5,7 @@
 <html >
   <head>
     <meta charset="UTF-8">
-    <title>Login</title>    
+    <title>LoginAdmin</title>    
      <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
@@ -16,19 +16,18 @@
 <body>
 
 <div class="container">
-  <h2>Accedi al tuo Account</h2>
+  <div align="center"> <h2>Account Amministratore</h2> </div>
   <form role="form">
     <div class="form-group">
       <label for="username">Username:</label>
-      <input type="username" class="form-control" id="username" placeholder="Enter username">
+      <input type="username" class="form-control" id="username" placeholder="Admin username">
     </div>
     <div class="form-group">
       <label for="pwd">Password:</label>
       <input type="password" class="form-control" id="pwd" placeholder="Enter password">
     </div>
     <div class="checkbox">
-      <label><input type="checkbox"> Ricordami</label>
-    </div>
+      </div>
     <button type="submit" class="btn btn-default">Accedi</button>
   </form>
 </div>

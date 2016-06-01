@@ -7,41 +7,25 @@
 <head>
 <meta charset="utf-8">
 
-<title>Clinica & Analisi:Administrators</title>
-</head>
-
 <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
   <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-  
-  <%@include file="header.html"%>
-  
+
+<title>Chi siamo</title>
+</head>
 <body>
-	<div class="container">
-		<h2>Amministratori</h2>
-		<p>Elenco del personale Tecnico Informatico:</p>
-		<table class="table table-bordered">
-			<thead>
-				<tr>
-					<th>Nome</th>
-					<th>Cognome</th>
-					<th>Email</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr class="info">
-					<td>Giovanni</td>
-					<td>Rana</td>
-					<td>Giova.rana@gmail.com</td>
-				</tr>
-				<tr class="info">
-					<td>Giovanna</td>
-					<td>Brava</td>
-					<td>Giova.brava@gmail.com</td>
-				</tr>
-			</tbody>
-		</table>
+ <f:view>
+
+  <%@include file="header.html"%>
+  <h:form>
+	<div class="panel panel-primary">
+	<div align="center">
+	<h3>Sito a cura di <b>Vincenzo D'Amico</b> e <b>Luca Bernabei</b> <br>
+		Corso di Laurea Triennale in Ingegneria Informatica - A.A. 15/16</h3>
+		</div>
 	</div>
-</body>
-</html>
+	</h:form>
+	</f:view>
+	</body>
+	</html>
