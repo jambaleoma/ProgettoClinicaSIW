@@ -1,5 +1,6 @@
 package it.uniroma3.controller;
 
+
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
@@ -13,8 +14,7 @@ import it.uniroma3.persistence.AdministratorDao;
 public class AdministratorController {
 	
 	@EJB(beanName="aDao")
-	private AdministratorDao aDao;
-	
+	private AdministratorDao aDao;	
 	private String username;
 	private String password;
 	private String fisrtName;
