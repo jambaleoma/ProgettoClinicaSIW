@@ -45,7 +45,7 @@ public class Typology {
 		this.exams.add(exam);
 	}
 	
-	public void addDoctorToTypology(Doctor doctor) {
+	public void addTypologyToDoctor(Doctor doctor) {
 		this.doctors.add(doctor);
 	}
 	
@@ -75,6 +75,11 @@ public class Typology {
 		this.details = details;
 	}
 
+	
+	public List<Doctor> getDoctors() {
+		return doctors;
+	}
+
 	public String toString() {
 		final StringBuilder sb = new StringBuilder();
 		sb.append("Typology"); 
@@ -84,4 +89,12 @@ public class Typology {
 		sb.append("}\n");
 		return sb.toString();
 	}	
+	
+	public boolean checkDoctor (Doctor d) {
+		for (Doctor i : this.doctors)
+			if (i.getId().equals(d.getId()))
+				return true;
+		return false;
+	}
+	
 }

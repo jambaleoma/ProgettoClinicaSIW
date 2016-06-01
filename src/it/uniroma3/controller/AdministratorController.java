@@ -1,9 +1,9 @@
 package it.uniroma3.controller;
 
 
+import javax.annotation.ManagedBean;
 import javax.ejb.EJB;
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
+import javax.enterprise.context.SessionScoped;
 import javax.faces.context.FacesContext;
 
 import it.uniroma3.model.Administrator;
