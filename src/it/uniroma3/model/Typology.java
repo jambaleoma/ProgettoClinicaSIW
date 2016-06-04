@@ -80,6 +80,19 @@ public class Typology {
 		return doctors;
 	}
 
+		
+	public List<Exam> getExams() {
+		return exams;
+	}
+
+	public void setExams(List<Exam> exams) {
+		this.exams = exams;
+	}
+
+	public void setDoctors(List<Doctor> doctors) {
+		this.doctors = doctors;
+	}
+
 	public String toString() {
 		final StringBuilder sb = new StringBuilder();
 		sb.append("Typology"); 

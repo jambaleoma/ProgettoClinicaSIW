@@ -58,9 +58,8 @@ public class Main {
 		ExamDao ed = new ExamDao();
 		System.out.println("Aggiungo all'esame Il dottore Mario Rossi");
 		System.out.println("Aggiungo all'esame il paziente Franco Bianchi");
-		ed.create("Esame Sangue Bianchi", null, null, td.findByPrimaryKey(1001L), pd.getPatientByUsername("FB1"), dd.getDoctorByLastname("Rossi"));
-		System.out.println("Stampo i dati dell'esame: " + ed.getExamByName("Esame Sangue Bianchi").toString());
-
+		ed.create(null, null, td.findByPrimaryKey(1001L), pd.getPatientByUsername("FB1"), dd.getDoctorByLastname("Rossi"));
+		
 		System.out.println("Verifico se l'esame è stato aggiunto al Paziente");
 		System.out.println("Stampo gli esami del paziente Bianchi: " + pd.getPatientByUsername("FB1").toStringExams());
 		System.out.println("Verifico se l'esame è stato aggiunto al Dottore");

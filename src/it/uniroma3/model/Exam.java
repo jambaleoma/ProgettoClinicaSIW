@@ -38,8 +38,7 @@ public class Exam {
 		
 	public Exam() {}
 
-	public Exam(String name, String result, Date examDate, Typology typology, Patient patient, Doctor doctor) {
-		this.name = name;
+	public Exam(String result, Date examDate, Typology typology, Patient patient, Doctor doctor) {
 		this.result = result;
 		this.examDate = examDate;
 		this.typology = typology;
@@ -49,14 +48,6 @@ public class Exam {
 	}
 
 	//METODS GETTER & SETTER
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
 
 	public String getResult() {
 		return result;
@@ -107,7 +98,6 @@ public class Exam {
 		final StringBuilder sb = new StringBuilder();
 		sb.append("Exam"); 
 		sb.append(" {Code=").append(code); 
-		sb.append(", NameExam='").append(name);
 		sb.append(", ExamDate='").append(examDate);
 		sb.append(", Doctor='").append(doctor);
 		sb.append(", Patient='").append(patient);
