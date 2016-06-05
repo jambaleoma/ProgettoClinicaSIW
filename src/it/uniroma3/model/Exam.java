@@ -18,13 +18,11 @@ public class Exam {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long code;
 
-	@Column (unique = true)
-	private String name;
+	@Temporal(TemporalType.DATE)
+	@Column(nullable=false)
+	private Date bookingDate;
 	
-	@Column
-	private String result;
-
-	@Temporal (TemporalType.DATE)
+	@Temporal(TemporalType.TIMESTAMP)
 	private Date examDate;
 
 	@ManyToOne
@@ -38,8 +36,8 @@ public class Exam {
 		
 	public Exam() {}
 
-	public Exam(String result, Date examDate, Typology typology, Patient patient, Doctor doctor) {
-		this.result = result;
+	public Exam(Date bookingDate, Date examDate, Typology typology, Patient patient, Doctor doctor) {
+		this.bookingDate = bookingDate;
 		this.examDate = examDate;
 		this.typology = typology;
 		this.doctor = doctor;
@@ -48,13 +46,13 @@ public class Exam {
 	}
 
 	//METODS GETTER & SETTER
-
-	public String getResult() {
-		return result;
-	}
 	
-	public void setResult(String result) {
-		this.result = result;
+	public Date getBookingDate() {
+		return bookingDate;
+	}
+
+	public void setBookingDate(Date bookingDate) {
+		this.bookingDate = bookingDate;
 	}
 
 	public Date getExamDate() {
@@ -97,11 +95,11 @@ public class Exam {
 	public String toString() {
 		final StringBuilder sb = new StringBuilder();
 		sb.append("Exam"); 
-		sb.append(" {Code=").append(code); 
-		sb.append(", ExamDate='").append(examDate);
+		sb.append(" {Code=").append(code);
+		sb.append(", Booking Date='").append(bookingDate);
+		sb.append(", Exam Date='").append(examDate);
 		sb.append(", Doctor='").append(doctor);
 		sb.append(", Patient='").append(patient);
-		sb.append(", Result= '").append(result);
 		sb.append("}\n");
 		return sb.toString();
 	}

@@ -1,48 +1,52 @@
 package it.uniroma3.persistence;
 
-import java.util.Date;
-import java.util.List;
-import javax.ejb.Stateless;
-import javax.persistence.*;
+
+import javax.persistence.EntityManager;
+import javax.persistence.EntityTransaction;
 
 import it.uniroma3.model.Patient;
 
-@Stateless (name="pDao")
 public class PatientDao {
 	
-	@PersistenceContext(unitName = "clinic-unit")
-	public EntityManager em;
+	private EntityManager em;
+		private static EntityTransaction tx;
 
-	public Patient create(String username, String password, String firstName, String lastName, Date dateOfBirth) {
-		Patient patient = new Patient(username, password, firstName, lastName, dateOfBirth);
-		this.em.persist(patient);
-		return patient;
+		public PatientDao(EntityManager em) {
+			this.em = em;
+		}
+		
+	public void save(Patient p) {
+		tx = em.getTransaction();
+		tx.begin();
+		em.persist(p);
+		tx.commit();
+		
 	}
 
-	public Patient getPatientByUsername(String username) {
-		Query q = em.createQuery("SELECT p FROM Patient p WHERE p.username = :username");
-		q.setParameter("username", username);
-		Patient p = (Patient) q.getSingleResult();
+	public void delete(Patient p) {
+		tx = em.getTransaction();
+		tx.begin();
+		Patient toRemove = em.merge(p);
+		em.remove(toRemove);
+		tx.commit();
+		}
+	
+	public void update(Patient p) {
+		tx = em.getTransaction();
+		tx.begin();
+		em.merge(p);
+		tx.commit();
+
+	}
+	
+	public Patient findByUsername(String username) {
+		tx = em.getTransaction();
+		tx.begin();
+		Patient p = em.find(Patient.class, username);
+		tx.commit();
 		return p;
 	}
 	
-	public Patient findByPrimaryKey(Long id) {
-		Patient p = this.em.find(Patient.class, id);
-		return p;
-	}
-
-	public List<Patient> findAll() {
-		TypedQuery<Patient> p = this.em.createQuery("SELECT p FROM Patient p", Patient.class);
-		return p.getResultList();
-	}
-
-	public void update(Patient patient) {
-		this.em.merge(patient);
-		}
-
-	public void delete(Long	id) {
-		Patient p = this.findByPrimaryKey(id);
-		this.em.remove(p);
-		}
-
+	
+	
 }

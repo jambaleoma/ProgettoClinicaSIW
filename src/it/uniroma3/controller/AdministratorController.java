@@ -1,31 +1,32 @@
 package it.uniroma3.controller;
 
 
+import java.util.List;
+
 import javax.annotation.ManagedBean;
 import javax.ejb.EJB;
-import javax.enterprise.context.SessionScoped;
 import javax.faces.context.FacesContext;
 
 import it.uniroma3.model.Administrator;
-import it.uniroma3.persistence.AdministratorDao;
+import it.uniroma3.facade.AdministratorFacade;
 
 @ManagedBean
-@SessionScoped
 public class AdministratorController {
 	
-	@EJB(beanName="aDao")
-	private AdministratorDao aDao;	
+	@EJB
+	private AdministratorFacade aFacade;	
 	private String username;
 	private String password;
 	private String fisrtName;
 	private String lastName;
 	private String eMail;
 	private Administrator administrator;
+	private List<Administrator> administrators;
 	private String message;
 	
 	public String loginAdmin() {
 		try {
-			Administrator a = this.aDao.getAdministratorByUsername(this.username);
+			Administrator a = this.aFacade.getAdministratorByUsername(this.username);
 			if(a.verificaPassword(this.password)){
 				this.setAdministrator(a);
 				return "instrumentPanel";
@@ -48,6 +49,14 @@ public class AdministratorController {
 		return "instrumentPanel";
 	}
 
+	public List<Administrator> getAdministrators() {
+		return administrators;
+	}
+
+	public void setAdministrators(List<Administrator> administrators) {
+		this.administrators = administrators;
+	}
+
 	public String getMessage() {
 		return message;
 	}
@@ -58,12 +67,12 @@ public class AdministratorController {
 	}
 
 
-	public AdministratorDao getaDao() {
-		return aDao;
+	public AdministratorFacade getaFacade() {
+		return aFacade;
 	}
 
-	public void setaDao(AdministratorDao aDao) {
-		this.aDao = aDao;
+	public void setaFacade(AdministratorFacade aFacade) {
+		this.aFacade = aFacade;
 	}
 
 	public String getUsername() {
