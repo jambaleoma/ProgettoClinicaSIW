@@ -5,8 +5,20 @@
 	<persistence-unit name="clinic-unit" transaction-type="JTA">
 		<provider>org.apache.openjpa.persistence.PersistenceProviderImpl</provider>
 		<jta-data-source>PostgreSQL Database</jta-data-source>
-		<class>it.uniroma3.model</class>
-		<class>it.uniroma3.facade</class>
+		<class>it.uniroma3.model.Administrator</class>
+		<class>it.uniroma3.model.Clinic</class>
+		<class>it.uniroma3.model.Doctor</class>
+		<class>it.uniroma3.model.Exam</class>
+		<class>it.uniroma3.model.Main</class>
+		<class>it.uniroma3.model.Patient</class>
+		<class>it.uniroma3.model.Result</class>
+		<class>it.uniroma3.model.Typology</class>
+		<class>it.uniroma3.facade.AdministratorFacade</class>
+		<class>it.uniroma3.facade.DoctorFacade</class>
+		<class>it.uniroma3.facade.ExamFacade</class>
+		<class>it.uniroma3.facade.PatientFacade</class>
+		<class>it.uniroma3.facade.ResultFacade</class>
+		<class>it.uniroma3.facade.TypologyFacade</class>
 		<properties>
 			<property name="openjpa.jdbc.SynchronizeMappings"  value="buildSchema(ForeignKeys=true)" />
 			<property name="openjpa.jdbc.MappingDefaults" value="ForeignKeyDeleteAction=cascade,JoinForeignKeyDeleteAction=cascade"/>
