@@ -21,7 +21,7 @@ public class Typology {
 	private String details;
 
 	@OneToMany
-	private List<Exam>exams;
+	private List<Exam> exams;
 
 	@ManyToMany(mappedBy = "typologies", fetch=FetchType.EAGER)
 	private List<Doctor>doctors;

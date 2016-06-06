@@ -9,9 +9,10 @@ import it.uniroma3.model.Typology;
 import it.uniroma3.model.Doctor;
 import it.uniroma3.model.Exam;
 import it.uniroma3.model.Patient;
+import it.uniroma3.model.Result;
 import it.uniroma3.facade.*;
 
-@ManagedBean
+@ManagedBean(name = "examController")
 public class ExamController {
 
 	@EJB
@@ -24,44 +25,53 @@ public class ExamController {
 	private Patient patient;
 	private Doctor doctor;
 	private Exam exam;
+	private List<Result> results;
 	private List<Exam> exams;
 	
 	private String message;
 	
 	public String CreateExam() {
 		this.exam = eFacade.create(examDate, bookingDate, typology, patient, doctor);
-		return "index";
+		return "AdminArea";
 	}
 	
-	public String listExam() {
-				this.setExams(eFacade.getAllExams());
-				return "exams";
-			}
+	public String listExams() {
+		this.exams = this.eFacade.getAllExams();
+		return "allExams";
+	}	
 	
 	public String findExam(Long code) {
 		this.exam = eFacade.getExamByCode(code);
 		return "index";
 	}
 	
-	public String getPatientByCodeExam() {
-		try {
-			this.exam = this.eFacade.getExamByCode(code);
-			this.patient = this.exam.getPatient();
-		} catch (Exception e) {return "loginAdmin"; }
-		return "infoPatient";
+	public String setTypologyExamBooking(Typology typology){
+		this.typology = typology;
+		return "pazientePrenotazione";
 	}
 	
-	public String listExams() {
-		this.exams = this.eFacade.getAllExams();
-		return "allExams";
+	public String setPatientBooking(Patient patient){
+		this.patient = patient;
+		return "doctorBooking";
 	}
 
-	public ExamFacade geteFacade() {
-		return eFacade;
+	public String setDoctorBooking(Doctor doctor){
+		this.doctor = doctor;
+		return "dataPrenotazione";
+	}
+	
+	public String confermBooking(){
+		return "confirmBooking";
+	}
+	
+	//METODS GETTER & SETTER
+	
+	public List<Result> getResults() {
+		return results;
 	}
 
-	public void seteFacade(ExamFacade eFacade) {
-		this.eFacade = eFacade;
+	public void setResults(List<Result> results) {
+		this.results = results;
 	}
 
 	public Date getBookingDate() {

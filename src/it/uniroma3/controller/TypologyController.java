@@ -4,10 +4,13 @@ import java.util.List;
 
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
+
 import it.uniroma3.facade.TypologyFacade;
 import it.uniroma3.model.Typology;
 
-@ManagedBean
+@ManagedBean(name= "typologyController")
+@SessionScoped
 public class TypologyController {
 
 	@EJB
@@ -21,17 +24,27 @@ public class TypologyController {
 
 	public String createTypology() {
 		this.typology = tFacade.create(code, name, details);
-		return "typologyAdmin";
+		return "typology";
 	}
 	
 	public String listTypologies() {
 		this.setTypologies(tFacade.getAllTypologies());
-			return "allTypologyies";
+			return "Typologies";
 	}
 	
 	public String getTypologyByCode(Long code) {
 		this.typology = tFacade.getTypologyByCode(code);
 			return "typology";
+	}
+	
+	public String findTypologyExamBooking(Long code){
+		this.typology = tFacade.getTypologyByCode(code);
+		return "typologyExamBooking";
+		}
+	
+	public String listTypologiesExamsBooking() {
+		this.setTypologies(tFacade.getAllTypologies());
+		return "ExamBooking"; 
 	}
 	
 	//METODS GETTER & SETTER

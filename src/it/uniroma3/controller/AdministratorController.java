@@ -3,14 +3,14 @@ package it.uniroma3.controller;
 
 import java.util.List;
 
-import javax.annotation.ManagedBean;
+
 import javax.ejb.EJB;
-import javax.faces.context.FacesContext;
+import javax.faces.bean.ManagedBean;
 
 import it.uniroma3.model.Administrator;
 import it.uniroma3.facade.AdministratorFacade;
 
-@ManagedBean
+@ManagedBean(name="administratorController")
 public class AdministratorController {
 	
 	@EJB
@@ -40,10 +40,6 @@ public class AdministratorController {
 			return "loginAdmin"; }
 		}
 
-	public String logOut() {
-		FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
-		return "index";
-	}
 	
 	public String returnInstrumentPanel() {
 		return "instrumentPanel";

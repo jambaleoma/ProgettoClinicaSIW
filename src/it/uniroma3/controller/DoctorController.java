@@ -8,7 +8,7 @@ import it.uniroma3.facade.DoctorFacade;
 import it.uniroma3.model.Doctor;
 import it.uniroma3.model.Exam;
 
-@ManagedBean
+@ManagedBean(name = "doctorController")
 public class DoctorController {
 	
 	@EJB
@@ -27,7 +27,7 @@ public class DoctorController {
 
 	public String listDoctors() {
 		this.setDoctors(dfacade.getAllDoctors());
-		return "doctors"; 
+		return "doctorBooking"; 
 	}
 
 	public String findDoctor(Long id) {

@@ -5,17 +5,16 @@ import java.util.List;
 
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 
 import it.uniroma3.facade.PatientFacade;
+import it.uniroma3.model.Exam;
 import it.uniroma3.model.Patient;
 
-@ManagedBean(name="pazienteController")
-@SessionScoped
+@ManagedBean(name="patientController")
 public class PatientController {
 
-	@EJB(beanName="PFacade")
+	@EJB
 	private PatientFacade pfacade;
 
 	private String username;
@@ -25,8 +24,18 @@ public class PatientController {
 	private String password;
 	private Patient patient;
 	private List<Patient> patients;
+	private List<Exam> exams;
 
-	
+
+	public String listExamsPatient(){
+		this.patient=this.pfacade.getPatientByUsername(username);
+		this.exams=this.patient.getExams();
+		if(this.exams!=null)
+			return "listExamsPatient";
+		else return "patientsArea";
+
+	}
+
 	public String loginPatient() {
 		String lp ="login";
 		patient = this.pfacade.getPatientByUsername(this.username);
@@ -37,7 +46,7 @@ public class PatientController {
 			}
 		return lp;
 	}
-	
+
 	public String createPatient(){
 		this.patient = pfacade.createPatient(username, password, firstName, lastName, dateOfBirth);
 		return "patient";
@@ -117,5 +126,13 @@ public class PatientController {
 		this.patients = patients;
 	}
 
-	
+	public List<Exam> getExams() {
+		return exams;
+	}
+
+	public void setExams(List<Exam> exams) {
+		this.exams = exams;
+	}
+
+
 }

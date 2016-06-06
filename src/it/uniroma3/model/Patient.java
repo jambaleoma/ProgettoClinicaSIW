@@ -33,7 +33,7 @@ public class Patient {
 	private Date dateOfBirth;
 
 	@OneToMany(mappedBy = "patient", fetch=FetchType.EAGER)
-	private List<Exam>exams;
+	private List<Exam> exams;
 
 	public Patient() {
 	}

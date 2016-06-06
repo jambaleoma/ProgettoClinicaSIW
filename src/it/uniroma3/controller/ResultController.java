@@ -8,7 +8,7 @@ import it.uniroma3.facade.ResultFacade;
 import it.uniroma3.model.Result;
 import it.uniroma3.model.Exam;
 
-@ManagedBean
+@ManagedBean(name="resultController")
 public class ResultController {
 
 	@EJB
