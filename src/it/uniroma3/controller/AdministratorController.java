@@ -6,14 +6,16 @@ import java.util.List;
 
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
 
 import it.uniroma3.model.Administrator;
 import it.uniroma3.facade.AdministratorFacade;
 
-@ManagedBean(name="administratorController")
+@ManagedBean 
+@SessionScoped
 public class AdministratorController {
 	
-	@EJB
+	@EJB(beanName="administratorFacade")
 	private AdministratorFacade aFacade;	
 	private String username;
 	private String password;
