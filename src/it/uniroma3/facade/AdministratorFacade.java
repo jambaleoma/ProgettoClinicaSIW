@@ -12,7 +12,7 @@ import it.uniroma3.model.Administrator;
 @Stateless
 public class AdministratorFacade {
 
-	@PersistenceContext(unitName = "unit-clinica")
+	@PersistenceContext(unitName = "clinic-unit")
 	private EntityManager em;
 
 	public Administrator createAdministrator(String username, String password, String firstName, String lastName, String eMail) {
