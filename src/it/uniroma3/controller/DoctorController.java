@@ -27,11 +27,16 @@ public class DoctorController {
 
 	public String listDoctors() {
 		this.setDoctors(dfacade.getAllDoctors());
-		return "doctorBooking"; 
+		return "doctors"; 
 	}
 
 	public String findDoctor(Long id) {
 		this.doctor = dfacade.getDoctorById(id);
+		return "medico";
+	}
+	
+	public String findDoctorByLastname(String lastname) {
+		this.doctor = dfacade.getDoctorByLastname(lastname);
 		return "medico";
 	}
 	

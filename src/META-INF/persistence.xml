@@ -20,6 +20,11 @@
 		<class>it.uniroma3.facade.ResultFacade</class>
 		<class>it.uniroma3.facade.TypologyFacade</class>
 		<properties>
+			<property name="openjpa.ConnectionDriverName" value="org.postgresql.Driver" />
+			<property name="openjpa.ConnectionUserName" value="postgres" />
+			<property name="openjpa.ConnectionPassword" value="postgres" />
+			<property name="openjpa.ConnectionURL" value="jdbc:postgresql://localhost/clinic" />
+			<property name="openjpa.jdbc.DBDictionary" value="postgres" />
 			<property name="openjpa.jdbc.SynchronizeMappings"  value="buildSchema(ForeignKeys=true)" />
 			<property name="openjpa.jdbc.MappingDefaults" value="ForeignKeyDeleteAction=cascade,JoinForeignKeyDeleteAction=cascade"/>
 		</properties>

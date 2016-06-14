@@ -18,8 +18,8 @@ import it.uniroma3.model.Typology;
 		@PersistenceContext(unitName = "clinic-unit")
 		public EntityManager em;
 
-		public Exam create(Date bookingDate, Date examDate, Typology typology, Patient patient, Doctor doctor) {
-			Exam exam = new Exam(bookingDate, null, typology, patient, doctor);
+		public Exam create(Date examDate, Typology typology, Patient patient, Doctor doctor) {
+			Exam exam = new Exam(examDate, typology, patient, doctor);
 			patient.addExamToPatient(exam);
 			doctor.addExamToDoctor(exam);
 			em.persist(exam);

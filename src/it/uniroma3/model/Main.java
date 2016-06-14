@@ -53,7 +53,7 @@ public class Main {
 		System.out.println("Associo all'esame la tipologia Esame del Sangue");
 		System.out.println("Aggiungo all'esame Il dottore Mario Rossi");
 		System.out.println("Aggiungo all'esame il paziente Franco Bianchi");
-		ef.create(null, null, tf.getTypologyByCode(10001L), pf.getPatientByUsername("Bianchi"), df.getDoctorByLastname("Rossi"));
+		ef.create(null, tf.getTypologyByCode(10001L), pf.getPatientByUsername("Bianchi"), df.getDoctorByLastname("Rossi"));
 		System.out.println("Verifico se l'esame è stato aggiunto al Paziente");
 		System.out.println("Stampo gli esami del paziente Bianchi: "+ pf.getPatientByUsername("FB1").toStringExams());
 		System.out.println("Verifico se l'esame è stato aggiunto al Dottore");

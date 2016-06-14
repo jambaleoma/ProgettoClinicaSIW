@@ -6,17 +6,25 @@ import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 @Entity
+@Table (name = "typologies")
+@NamedQuery(name = "findAllTypologies", query = "SELECT t FROM Typology t")
 public class Typology {
 
 	@Id
-	private Long code;
-
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private Long id;
+	
 	@Column (nullable = false)
+	private Long code;
 	private String name;
 	private String details;
 
@@ -51,8 +59,14 @@ public class Typology {
 	
 	//METODS GETTER & SETTER
 
+	
+	
 	public Long getCode() {
 		return code;
+	}
+
+	public Long getId() {
+		return id;
 	}
 
 	public void setCode(Long code) {

@@ -34,14 +34,14 @@
 			</thead>
 			<tbody>
 				<tr class="info">
-					<td>Giovanni</td>
-					<td>Rana</td>
-					<td>Giova.rana@gmail.com</td>
+					<td>Admin</td>
+					<td>1</td>
+					<td>Admin.1@clinic.com</td>
 				</tr>
 				<tr class="info">
-					<td>Giovanna</td>
-					<td>Brava</td>
-					<td>Giova.brava@gmail.com</td>
+					<td>Admin</td>
+					<td>2</td>
+					<td>Admin.2@clinic.com</td>
 				</tr>
 			</tbody>
 		</table>

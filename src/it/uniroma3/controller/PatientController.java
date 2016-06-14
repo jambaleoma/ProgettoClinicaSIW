@@ -5,16 +5,18 @@ import java.util.List;
 
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 
 import it.uniroma3.facade.PatientFacade;
 import it.uniroma3.model.Exam;
 import it.uniroma3.model.Patient;
 
-@ManagedBean(name="patientController")
+@ManagedBean
+@SessionScoped
 public class PatientController {
 
-	@EJB
+	@EJB (beanName="patientFacade")
 	private PatientFacade pfacade;
 
 	private String username;
@@ -25,32 +27,64 @@ public class PatientController {
 	private Patient patient;
 	private List<Patient> patients;
 	private List<Exam> exams;
+	private String message;	
 
+	public String createPatient(){
+		try {
+			this.patient = pfacade.createPatient(username, password, firstName, lastName, dateOfBirth);
+			this.message = "Paziente inserito correttamente";
+			FacesContext.getCurrentInstance().getExternalContext().getSessionMap().remove("patientController");
+			return "PatientSummary";
+		}catch (Exception e) {
+			this.message = "Username gia' esistente!";
+			return "newPatient";
+		}
+	}
+	
+	public String createPatientByRegistration() {
+		try {
+		this.patient = this.pfacade.createPatient(this.username, this.password, this.firstName, this.lastName, this.dateOfBirth);
+		return "patientSummary";
+		}catch (Exception e) {
+			this.message = "Username gia' esistente!";
+			return "newPatient";
+		}
+	}
 
-	public String listExamsPatient(){
+	public String login() {
+		try {
+			Patient p = pfacade.getPatientByUsername(this.username);
+			if (p.checkPassword(this.password)) {
+				this.patient = p;
+				return "index";
+			}
+			else {
+				this.message = "Password errata";
+				return "login";
+			}
+		}
+		catch (Exception e) {
+			this.message = "Username errato";
+			return "login";
+		}
+	}
+
+	public String logout () {
+		FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
+		return "index";
+	}
+
+	public String patientProfile() {
+		return "patientProfile";
+	}
+
+	/* public String listExamsPatient(){
 		this.patient=this.pfacade.getPatientByUsername(username);
 		this.exams=this.patient.getExams();
 		if(this.exams!=null)
 			return "listExamsPatient";
 		else return "patientsArea";
-
-	}
-
-	public String loginPatient() {
-		String lp ="login";
-		patient = this.pfacade.getPatientByUsername(this.username);
-		if(patient!=null)
-			if(password.equals(patient.getPassword())){
-				lp="patientsArea";
-				FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("patient", patient);
-			}
-		return lp;
-	}
-
-	public String createPatient(){
-		this.patient = pfacade.createPatient(username, password, firstName, lastName, dateOfBirth);
-		return "patient";
-	}
+	} */
 
 	public String listPatients() {
 		this.setPatients(pfacade.getAllPatients());
@@ -132,6 +166,14 @@ public class PatientController {
 
 	public void setExams(List<Exam> exams) {
 		this.exams = exams;
+	}
+
+	public String getMessage() {
+		return message;
+	}
+
+	public void setMessage(String message) {
+		this.message = message;
 	}
 
 

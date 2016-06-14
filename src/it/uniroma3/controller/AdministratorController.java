@@ -1,12 +1,9 @@
 package it.uniroma3.controller;
 
-
-import java.util.List;
-
-
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
 
 import it.uniroma3.model.Administrator;
 import it.uniroma3.facade.AdministratorFacade;
@@ -17,13 +14,13 @@ public class AdministratorController {
 	
 	@EJB(beanName="administratorFacade")
 	private AdministratorFacade aFacade;	
+	
 	private String username;
 	private String password;
-	private String fisrtName;
+	private String firstName;
 	private String lastName;
 	private String eMail;
 	private Administrator administrator;
-	private List<Administrator> administrators;
 	private String message;
 	
 	public String loginAdmin() {
@@ -31,28 +28,23 @@ public class AdministratorController {
 			Administrator a = this.aFacade.getAdministratorByUsername(this.username);
 			if(a.verificaPassword(this.password)){
 				this.setAdministrator(a);
-				return "instrumentPanel";
+				return "dashboard";
 				}
 			else {
 				this.message="Password errata";
-				return "loginAdmin";
+				return "loginDashboard";
 			}
 		}catch (Exception e) {
 			this.message= "Username errato";
-			return "loginAdmin"; }
+			return "loginDashboard"; }
 		}
-
 	
-	public String returnInstrumentPanel() {
-		return "instrumentPanel";
-	}
-
-	public List<Administrator> getAdministrators() {
-		return administrators;
-	}
-
-	public void setAdministrators(List<Administrator> administrators) {
-		this.administrators = administrators;
+	public String logOut() {
+		FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
+		return "index";
+	}	
+	public String returnDashboard() {
+		return "dashboard";
 	}
 
 	public String getMessage() {
@@ -90,11 +82,11 @@ public class AdministratorController {
 	}
 
 	public String getFisrtName() {
-		return fisrtName;
+		return firstName;
 	}
 
 	public void setFisrtName(String fisrtName) {
-		this.fisrtName = fisrtName;
+		this.firstName = fisrtName;
 	}
 
 	public String getLastName() {

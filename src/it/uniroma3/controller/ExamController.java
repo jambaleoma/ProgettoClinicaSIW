@@ -5,41 +5,64 @@ import java.util.List;
 
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
+import javax.faces.context.FacesContext;
+
 import it.uniroma3.model.Typology;
 import it.uniroma3.model.Doctor;
 import it.uniroma3.model.Exam;
 import it.uniroma3.model.Patient;
-import it.uniroma3.model.Result;
 import it.uniroma3.facade.*;
 
-@ManagedBean(name = "examController")
+@ManagedBean
 public class ExamController {
 
-	@EJB
+	@EJB (beanName="examFacade")
 	private ExamFacade eFacade;
+	
+	@EJB (beanName="patientFacade")
+	private PatientFacade pFacade;
+	
+	@EJB (beanName="typologyFacade")
+	private TypologyFacade tFacade;
+	
+	@EJB (beanName="doctorFacade")
+	private DoctorFacade dFacade;
+	
+	@ManagedProperty(value="#{param.code}")
 	private Long code;
-	private Date bookingDate;
 	private Date examDate;
 	private String result;
-	private Typology typology;
-	private Patient patient;
-	private Doctor doctor;
 	private Exam exam;
-	private List<Result> results;
-	private List<Exam> exams;
-	
+	private List<Exam> exams;	
 	private String message;
 	
-	public String CreateExam() {
-		this.exam = eFacade.create(examDate, bookingDate, typology, patient, doctor);
-		return "AdminArea";
+	@ManagedProperty(value="#{param.typologycode}")
+	private Long typologyCode;
+	
+	@ManagedProperty (value="#{sessionScope['patientController'].patient}")
+	private Patient patient;
+	
+	@ManagedProperty (value="#{sessionScope['doctorController'].doctor}")
+	private Doctor doctor;
+	
+	@ManagedProperty (value="#{sessionScope['typologyController'].typology}")
+	private Typology typology;
+	
+	public String createExam() {
+		Exam e = eFacade.create(examDate, typology, patient, doctor);
+		FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("currentExam", e);
+		return "index";
 	}
 	
 	public String listExams() {
-		this.exams = this.eFacade.getAllExams();
-		return "allExams";
+		if (this.patient==null)
+			return "login";
+		else{
+			this.exams = this.patient.getExams();
+		return "myExams";
 	}	
-	
+	}
 	public String findExam(Long code) {
 		this.exam = eFacade.getExamByCode(code);
 		return "index";
@@ -65,22 +88,6 @@ public class ExamController {
 	}
 	
 	//METODS GETTER & SETTER
-	
-	public List<Result> getResults() {
-		return results;
-	}
-
-	public void setResults(List<Result> results) {
-		this.results = results;
-	}
-
-	public Date getBookingDate() {
-		return bookingDate;
-	}
-
-	public void setBookingDate(Date bookingDate) {
-		this.bookingDate = bookingDate;
-	}
 
 	public Date getExamDate() {
 		return examDate;

@@ -8,21 +8,22 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
+import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-@Entity 
+@Entity
+@Table (name = "exams")
+@NamedQuery(name = "findAllExams", query = "SELECT e FROM Exam e")
 public class Exam {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long code;
-
-	@Temporal(TemporalType.DATE)
-	@Column(nullable=false)
-	private Date bookingDate;
 	
-	@Temporal(TemporalType.TIMESTAMP)
+	@Column (nullable = false)
+	@Temporal(TemporalType.DATE)
 	private Date examDate;
 
 	@ManyToOne
@@ -36,8 +37,7 @@ public class Exam {
 		
 	public Exam() {}
 
-	public Exam(Date bookingDate, Date examDate, Typology typology, Patient patient, Doctor doctor) {
-		this.bookingDate = bookingDate;
+	public Exam(Date examDate, Typology typology, Patient patient, Doctor doctor) {
 		this.examDate = examDate;
 		this.typology = typology;
 		this.doctor = doctor;
@@ -47,14 +47,6 @@ public class Exam {
 
 	//METODS GETTER & SETTER
 	
-	public Date getBookingDate() {
-		return bookingDate;
-	}
-
-	public void setBookingDate(Date bookingDate) {
-		this.bookingDate = bookingDate;
-	}
-
 	public Date getExamDate() {
 		return examDate;
 	}
@@ -96,7 +88,6 @@ public class Exam {
 		final StringBuilder sb = new StringBuilder();
 		sb.append("Exam"); 
 		sb.append(" {Code=").append(code);
-		sb.append(", Booking Date='").append(bookingDate);
 		sb.append(", Exam Date='").append(examDate);
 		sb.append(", Doctor='").append(doctor);
 		sb.append(", Patient='").append(patient);
